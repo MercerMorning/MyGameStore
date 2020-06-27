@@ -6,6 +6,7 @@
         "framework",
         "laravel"
     ],
+    "ext-mysql": "*",
     "license": "MIT",
     "require": {
         "php": "^7.1.3",

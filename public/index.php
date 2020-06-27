@@ -58,3 +58,16 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+if ($_SERVER['SERVER_NAME'] == "gamecave.herokuapp.com") {
+    $url = parse_url(getenv("http://127.0.0.1/openserver/phpmyadmin/db_structure.php?server=1&db=gamecave"));
+    $host = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $dbname = substr($url["path"], 1);
+} else {
+    $host = 'localhost';
+    $dbname = 'db';
+    $username = 'user';
+    $password = '123';
+}
