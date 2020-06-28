@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ParsingController;
+
 require __DIR__ . '/functions.php';
 
 /**
@@ -60,4 +62,23 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+
+/**
+ * Планировщик задач
+ */
+$startTime = new \DateTime('2020-06-28 20:00:00');
+$rule = new \Scheduler\Job\RRule('FREQ=DAILY;COUNT=5', $startTime); //run monthly, at 20:00:00 starting from the 12th of December 2017, 5 times
+$job = new \Scheduler\Job\Job($rule, function () {
+    //do something
+    ParsingController::updatePrice();
+});
+
+$scheduler = new \Scheduler\Scheduler();
+$scheduler->addJob($job);
+
+$jobRunner = new \Scheduler\JobRunner\JobRunner();
+$from      = new \DateTime('2020-06-28 20:00:00');
+$to        = new \DateTime('2020-06-28 20:00:00');
+$reports   = $jobRunner->run($scheduler, $from, $to, true);
+
 

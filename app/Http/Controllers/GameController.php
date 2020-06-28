@@ -40,6 +40,7 @@ class GameController extends Controller
     }
 
 
+
     function save(Request $request)
     {
         $game = Game::query()->find($request->id);

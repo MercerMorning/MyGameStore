@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/update', 'ParsingController@updatePrice')->name('update');
+
 Route::get('/games', 'FrontController@list')->name('games.list');
 Route::get('/game/{id}', 'FrontController@single')->name('game.single');
 Route::get('/game/link/{id}', 'FrontController@link')->name('game.link');
