@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Http\Requests\GameRequest;
+use App\Parsing;
+use App\Site;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -18,29 +20,39 @@ class GameController extends Controller
         return view('gamecave.games.edit', ['game' => $game]);
     }
 
-    function add(BookRequest $request)
+    function add(GameRequest $request)
     {
-        $book = new Book();
-        $book->name = $request->name;
-        $book->price = $request->price;
-        $book->save();
-        return redirect()->route('books');
+        foreach (SITES as $value) {
+            $site = new Site();
+            $site->name = $value;
+            $site->description = $request->name;
+            $site->price = clearPrice(Parsing::price($value, urlName($request->name)));
+            $site->save();
+        }
+        $game = new Game();
+        $game->name = $request->name;
+        $game->price = $request->price;
+        $game->description = $request->description;
+        $game->category = $request->category;
+        $game->image = $request->file('image')->store('uploads', 'public');
+        $game->save();
+        return redirect()->route('admin.list');
     }
 
 
-    function save(GameRequest $request)
+    function save(Request $request)
     {
         $game = Game::query()->find($request->id);
         $game->name = $request->name;
         $game->price = $request->price;
-        $game->image = $request->image;
-        $game->description = $request->description;
+        //$game->image = $request->file('image')->store('uploads', 'public');
+        //$game->description = $request->description;
         $game->category = $request->category;
         $game->save();
         return redirect()->route('admin.list');
     }
 
-    function delete(GameRequest $request)
+    function delete(Request $request)
     {
         Game::destroy($request->id);
         return redirect()->route('admin.list');

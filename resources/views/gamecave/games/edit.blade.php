@@ -6,6 +6,7 @@
                 <div class="panel-heading">Edit game</div>
                 <form enctype="multipart/form-data" action="{{route('game.save', ['id' => $game])}}" method="get">
                     {{ csrf_field() }}
+                    {{ $game }}
                     <table class="table table-bordered">
                         <tr>
                             <td>name</td>
@@ -44,11 +45,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>photo</td>
+                            <td>image</td>
                             <td>
-                                <input type="file" name="photo">
-                                @if ($errors->has('photo'))
-                                    <div class="alert alert-danger">{{$errors->first('photo')}}</div>
+                                <input type="file" name="image">
+                                @if ($errors->has('image'))
+                                    <div class="alert alert-danger">{{$errors->first('image')}}</div>
                                 @endif
                             </td>
                         </tr>

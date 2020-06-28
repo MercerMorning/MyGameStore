@@ -17,11 +17,11 @@
         <div class="main">
             @foreach($games as $game)
             <div class="view view-first">
-                <img src="images/1.jpg" />
+                <img src="{{ URL::asset('storage/' . $game->image) }}" />
                 <div class="mask">
                     <h2>{{ $game->name }}</h2>
                     <p>{{ $game->description }}</p>
-                    <a href="single.html" class="info">Play It</a>
+                    <a href="{{route('game.single', ['id' => $game->id])}}" class="info">buy</a>
                 </div>
             </div>
             @endforeach

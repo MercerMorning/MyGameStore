@@ -26,9 +26,9 @@ class GameRequest extends FormRequest
         return [
             'name' => 'required',
             'price' => 'numeric',
-            'description' => 'required',
             'category' => 'required',
-            'image' => 'required',
+            'description' => 'required',
+            'image' => 'required'
         ];
     }
 }
