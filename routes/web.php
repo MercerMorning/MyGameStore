@@ -15,7 +15,7 @@ Route::get('/update', 'ParsingController@updatePrice')->name('update');
 
 Route::get('/games', 'FrontController@list')->name('games.list');
 Route::get('/game/{id}', 'FrontController@single')->name('game.single');
-Route::get('/game/link/{id}', 'FrontController@link')->name('game.link');
+Route::get('/game/link/{site}/{game}', 'FrontController@link')->name('game.link');
 Route::get('/', 'FrontController@main')->name('main');
 
 Route::get('/admin', 'AdminController@index')->name('admin.list');
@@ -25,5 +25,10 @@ Route::get('/admin/game/create', 'GameController@create')->name('game.create');
 Route::get('/admin/game/delete/{id}', 'GameController@delete')->name('game.delete');
 Route::post('/admin/game/add', 'GameController@add')->name('game.add');
 
+
 //Route::get('categories/edit/{category}', 'AdminController@categoryEdit')->name('categories.edit');
 //Route::post('categories/save/{id}', 'AdminController@categorySave')->name('categories.save');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -22,11 +22,11 @@ class GameController extends Controller
 
     function add(GameRequest $request)
     {
-        foreach (SITES as $key => $value) {
+        foreach (SITES as $key) {
             $site = new Site();
-            $site->name = $key;
+            $site->name = $key['name'];
             $site->description = $request->name;
-            $site->price = clearPrice(Parsing::price($key, urlName($request->name), $value));
+            $site->price = clearPrice(Parsing::price($key, urlName($request->name), $key['priceBlock']));
             $site->save();
         }
         $game = new Game();
@@ -38,8 +38,6 @@ class GameController extends Controller
         $game->save();
         return redirect()->route('admin.list');
     }
-
-
 
     function save(Request $request)
     {

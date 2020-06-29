@@ -26,7 +26,7 @@
                 <ul>
                     @foreach($prices as $price)
                         <li>
-                            <a href="{{'https://' . $price->name . $nameForLink}}">
+                            <a href="{{route('game.link', ['siteName' => $price->name,'gameName' => $price->description])}}">
                                 {{ $price->name }}
                             </a>
                             <p>{{ $price->price }}</p>

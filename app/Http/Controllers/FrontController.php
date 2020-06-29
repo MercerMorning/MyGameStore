@@ -24,6 +24,7 @@ class FrontController extends Controller
 
     public function single($game)
     {
+
         $game = Game::query()->find($game);
         $prices = Site::query()
             ->where('description', '=', $game->name)
@@ -34,8 +35,9 @@ class FrontController extends Controller
         return view('gamecave.games.single', ['game' => $game, 'prices' => $prices, 'nameForLink' => $nameForLink]);
     }
 
-    public function link($site, $game)
+    public function link($siteName, $gameName)
     {
-        return getFullAddress($site, $game);
+        $site = SITES[$siteName];
+        return redirect(getFullAddress($site['name'] . $site['domen'] . $site['dir'], urlName($gameName)));
     }
 }
