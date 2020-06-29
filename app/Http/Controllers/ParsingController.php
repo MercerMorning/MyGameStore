@@ -12,11 +12,11 @@ class ParsingController extends Controller
     {
         $games = Game::all();
         foreach ($games as $game) {
-            foreach (SITES as $value) {
+            foreach (SITES as $key => $value) {
                 $site = new Site();
-                $site->name = $value;
+                $site->name = $key;
                 $site->description = $game->name;
-                $site->price = clearPrice(Parsing::price($value, urlName($game->name)));
+                $site->price = clearPrice(Parsing::price($key, urlName($game->name), $value));
                 $site->save();
             }
         }

@@ -14,4 +14,8 @@ function getFullAddress($site, $game) {
     return 'https://'. $site . $game;
 }
 
-const SITES = ['zaka-zaka.com/game/', 'gabestore.ru/game/', 'steam-account.ru/oplata/'];
+const SITES = [
+    'zaka-zaka.com/game/' => '.price',
+    'gabestore.ru/game/' => '.b-card__price-currentprice',
+    'steampay.com/game/' => '.product__current-price'
+];

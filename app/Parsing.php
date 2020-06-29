@@ -8,11 +8,11 @@ use Symfony\Component\DomCrawler\Crawler;
 class Parsing extends Model
 {
 
-    public static function price($site, $game)
+    public static function price($site, $game, $divClass)
     {
         @$html = file_get_contents(getFullAddress($site, $game));
         $crawler = new Crawler($html);
-        $parsed = $crawler->filter('.price');
+        $parsed = $crawler->filter($divClass);
         return $parsed->text();
     }
 

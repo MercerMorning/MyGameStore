@@ -22,11 +22,11 @@ class GameController extends Controller
 
     function add(GameRequest $request)
     {
-        foreach (SITES as $value) {
+        foreach (SITES as $key => $value) {
             $site = new Site();
-            $site->name = $value;
+            $site->name = $key;
             $site->description = $request->name;
-            $site->price = clearPrice(Parsing::price($value, urlName($request->name)));
+            $site->price = clearPrice(Parsing::price($key, urlName($request->name), $value));
             $site->save();
         }
         $game = new Game();
