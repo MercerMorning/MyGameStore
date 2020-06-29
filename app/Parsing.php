@@ -11,9 +11,12 @@ class Parsing extends Model
     public static function price($site, $game, $divClass)
     {
         @$html = file_get_contents(getFullAddress($site['name'] . $site['domen'] . $site['dir'], $game));
-        $crawler = new Crawler($html);
-        $parsed = $crawler->filter($divClass);
-        return $parsed->text();
+        if ($html) {
+            $crawler = new Crawler($html);
+            $parsed = $crawler->filter($divClass);
+            return $parsed->text();
+        }
+        return 0;
     }
 
 //    public static function index()

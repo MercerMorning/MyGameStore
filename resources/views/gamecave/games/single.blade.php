@@ -35,7 +35,7 @@
                 </ul>
             </div>
 
-            <div class="comment-box">
+            <form action="" class="comment-box">
                 <h3 class="page-header">Comment Here </h3>
                 <div class="text-cmt">
                     <input type="text" placeholder="Name" required=""/>
@@ -47,7 +47,7 @@
                 <div class="text-cmt">
                     <input type="submit" />
                 </div>
-            </div>
+            </form>
         </div>
         <div class="blog-sidebar">
             <h3 class="page-header">Catgeories</h3>

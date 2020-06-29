@@ -22,6 +22,9 @@ class GameController extends Controller
 
     function add(GameRequest $request)
     {
+//        foreach (SITES as $key) {
+//            echo Parsing::price($key, urlName($request->name), $key['priceBlock']);
+//        }
         foreach (SITES as $key) {
             $site = new Site();
             $site->name = $key['name'];
