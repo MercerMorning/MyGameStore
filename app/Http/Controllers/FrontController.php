@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Game;
 use App\Parsing;
 use App\Site;
@@ -24,7 +25,7 @@ class FrontController extends Controller
 
     public function single($game)
     {
-
+        $comments = Comment::all()->where('game_id', '=', $game);
         $game = Game::query()->find($game);
         $prices = Site::query()
             ->where('description', '=', $game->name)
@@ -32,7 +33,7 @@ class FrontController extends Controller
             ->limit(count(SITES))
             ->get();
         $nameForLink = urlName($game->name);
-        return view('gamecave.games.single', ['game' => $game, 'prices' => $prices, 'nameForLink' => $nameForLink]);
+        return view('gamecave.games.single', ['game' => $game, 'prices' => $prices, 'nameForLink' => $nameForLink, 'comments' => $comments]);
     }
 
     public function link($siteName, $gameName)

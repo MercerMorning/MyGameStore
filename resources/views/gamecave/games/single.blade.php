@@ -29,25 +29,51 @@
                             <a href="{{route('game.link', ['siteName' => $price->name,'gameName' => $price->description])}}">
                                 {{ $price->name }}
                             </a>
-                            <p>{{ $price->price }}</p>
+                            @if ($price->price == 0)
+                                <p>нет в наличии</p>
+                            @else
+                                <p>{{ $price->price }}</p>
+                            @endif
                         </li>
                     @endforeach
+
                 </ul>
             </div>
 
-            <form action="" class="comment-box">
+            <ul>
+                <li>
+                @foreach($comments as $comment)
+                    <ul style="border: 2px solid black">
+                        <li>
+                            {{ $comment->name }}
+                        </li>
+                        <li>
+                            {{ $comment->email }}
+                        </li>
+                        <li>
+                            {{ $comment->message }}
+                        </li>
+                    </ul>
+                @endforeach
+                </li>
+            </ul>
+
+            <form action="{{route('game.comment.add', ['id' => $game->id])}}" method="post" class="comment-box">
+                {{ csrf_field() }}
                 <h3 class="page-header">Comment Here </h3>
                 <div class="text-cmt">
-                    <input type="text" placeholder="Name" required=""/>
-                    <input type="text" placeholder="Email" required=""/>
+                    <input type="text" name="name" placeholder="Name" required=""/>
+                    <input type="text" name="email" placeholder="Email" required=""/>
                 </div>
                 <div class="text-cmt">
-                    <textarea placeholder="Message" required=""></textarea>
+                    <input name="message" placeholder="Message" required=""></input>
                 </div>
                 <div class="text-cmt">
                     <input type="submit" />
                 </div>
             </form>
+            <ul>
+            </ul>
         </div>
         <div class="blog-sidebar">
             <h3 class="page-header">Catgeories</h3>

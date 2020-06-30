@@ -17,6 +17,7 @@ Route::get('/games', 'FrontController@list')->name('games.list');
 Route::get('/game/{id}', 'FrontController@single')->name('game.single');
 Route::get('/game/link/{site}/{game}', 'FrontController@link')->name('game.link');
 Route::get('/', 'FrontController@main')->name('main');
+Route::post('/game/comment/add/{id}', 'CommentController@add')->name('game.comment.add');
 
 Route::get('/admin', 'AdminController@index')->name('admin.list');
 Route::get('/admin/game/save/{id}', 'GameController@save')->name('game.save');
