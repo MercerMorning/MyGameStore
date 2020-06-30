@@ -32,8 +32,12 @@ class FrontController extends Controller
             ->orderByDesc('created_at')
             ->limit(count(SITES))
             ->get();
+        $table = Site::query()
+            ->where('description', '=', $game->name)
+            ->orderByDesc('created_at')
+            ->get();
         $nameForLink = urlName($game->name);
-        return view('gamecave.games.single', ['game' => $game, 'prices' => $prices, 'nameForLink' => $nameForLink, 'comments' => $comments]);
+        return view('gamecave.games.single', ['game' => $game, 'prices' => $prices, 'nameForLink' => $nameForLink, 'comments' => $comments, 'table' => $table]);
     }
 
     public function link($siteName, $gameName)
